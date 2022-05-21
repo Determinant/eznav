@@ -1,0 +1,649 @@
+<html>
+  <head>
+    <script src="https://cdn.jsdelivr.net/gh/masotime/json-url@master/dist/browser/json-url.js"></script>
+    <style>
+@font-face {
+  font-family: "ocr";
+  src: url("./ocr-a-ext.woff") format('woff');
+}
+body {
+  font-family: "ocr", monospace;
+  font-size: 12px;
+}
+table.main {
+  margin-bottom: 10px;
+  width: 100%;
+  border: 2px solid black;
+  font-family: "ocr", monospace;
+  font-size: 12px;
+  letter-spacing: -1px;
+  border-collapse: collapse;
+}
+div.container{
+  width: 10in;
+  margin: auto;
+}
+table.main td {
+  padding: 2px 5px 2px 5px;
+  text-align: center;
+  border: 1px solid;
+}
+
+div.row {
+  font-size: 5px;
+  text-align: center;
+}
+
+h1 {
+  font-family: "ocr", monospace;
+  font-size: 20px;
+  margin: 0;
+  margin-bottom: 5px;
+}
+
+div.col3 {
+  width: 33%;
+  vertical-align: top;
+  display: inline-block;
+  margin: 0;
+}
+
+div.col1 {
+  display: inline-block;
+  width: 100%;
+}
+
+table.main tr.header td, table.main td.header {
+  border: 1px solid black;
+  color: white;
+  background-color: #666;
+}
+
+table.main tr.header0 td, table.main td.header0 {
+  border: 1px solid black;
+  color: white;
+  background-color: black;
+}
+
+table.main td.info {
+  border: 1px solid black;
+  color: black;
+  background-color: #C1D7AE;
+}
+
+table.main td input {
+  font-family: "ocr", monospace;
+  min-width: 1rem;
+}
+
+table.main tr.header td.bottom, table.main td.bottom {
+  border-bottom: 2px solid black;
+}
+table.main td.top {
+  border-top: 2px solid black;
+}
+table.main td.left {
+  border-left: 2px solid black;
+}
+table.main td.right {
+  border-right: 2px solid black;
+}
+table.main tr.even td.even {
+  background-color: #F7E9C4;
+}
+table.main td.comment {
+  width: 200px;
+}
+table.main td div {
+  background: repeating-linear-gradient(
+    45deg,
+    rgba(0, 0, 0, 0.05),
+    rgba(0, 0, 0, 0.05) 2px,
+    rgba(0, 0, 0, 0.1) 2px,
+    rgba(0, 0, 0, 0.1) 4px
+      );
+}
+.gray {
+  background-color: #ccc;
+}
+.buttons button {
+  display: inline-block;
+}
+.buttons {
+  margin-top: 10px;
+  text-align: center;
+}
+.copyright, #url {
+  margin-top: 20px;
+  font-size: 10px;
+  font-family: "ocr", monospace;
+}
+
+.copyright {
+  text-align: right;
+}
+
+#url {
+  color: #587341;
+  overflow-wrap: anywhere;
+  text-align: left;
+}
+  @media print {
+    body {
+      margin: 0;
+    }
+    .buttons {
+      display: none;
+    }
+  }
+
+  td.chHeader, td.altHeader {
+    min-width: 20px;
+  }
+
+  .mc, .wca, .gs, .mh, .ch, .ete, .eta, .rem {
+    color: #aaa;
+  }
+  .gph {
+    vertical-align: top;
+    border: 1px solid black;
+    display: inline-block;
+    width: 20px;
+    height: 12px;
+    margin-left: 5px;
+    margin-right: -5px;
+    background-color: white;
+  }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <h1>NavLog</h1>
+      </div>
+      <div class="row">
+        <div class="col3">
+          <table class="main">
+            <tr class="header0">
+              <td colspan="3">Airport &amp; ATIS Advisories</td>
+            </tr>
+            <tr class="header">
+              <td>Destination</td>
+              <td style="background-color:white;">Code</td>
+              <td>Departure</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td>Code</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td>Wind</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td>Vis</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td>Ceil</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td>T/D/Alt</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td>Rwy</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td>Elev</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td>TPA</td>
+              <td></td>
+            </tr>
+          </table>
+        </div>
+        <div class="col3">
+          <table class="main">
+            <tr class="header0">
+              <td colspan="3">Airport Frequencies</td>
+            </tr>
+            <tr class="header">
+              <td>Destination</td>
+              <td style="background-color:white;">Code</td>
+              <td>Departure</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td>ATIS</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td>Ground</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td>Tower</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td>FSS</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td>Apch</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td>Unicom</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td>CTAF</td>
+              <td></td>
+            </tr>
+          </table>
+        </div>
+        <div class="col3">
+          <table class="main">
+            <tr class="header0">
+              <td>Notes</td>
+            </tr>
+            <tr>
+              <td>&nbsp;</td>
+            </tr>
+            <tr>
+              <td>&nbsp;</td>
+            </tr>
+            <tr>
+              <td>&nbsp;</td>
+            </tr>
+            <tr>
+              <td>&nbsp;</td>
+            </tr>
+            <tr>
+              <td>&nbsp;</td>
+            </tr>
+            <tr>
+              <td>&nbsp;</td>
+            </tr>
+            <tr>
+              <td>&nbsp;</td>
+            </tr>
+            <tr>
+              <td>&nbsp;</td>
+            </tr>
+            <tr>
+              <td>&nbsp;</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col1">
+          <table class="main" id="navlog">
+            <tr class="header">
+              <td rowspan="3">Check Points</td>
+              <td>VOR</td>
+              <td class="chHeader bottom" rowspan="4">CH</td>
+              <td class="altHeader bottom" rowspan="4">Alt</td>
+              <td>Dist</td>
+              <td rowspan="2">GS</td>
+              <td colspan="3">Time Off</td>
+              <td><span>GPH</span><span class="gph"></span></td>
+              <td colspan="2">Wind (Mag.)</td>
+              <td>RPM</td>
+              <td>TC</td>
+              <td>MC</td>
+              <td>MH</td>
+              <td style="background-color: white;" colspan="2"></td>
+            </tr>
+            <tr>
+              <td class="info">Ident</td>
+              <td class="info">Leg</td>
+              <td colspan="3"></td>
+              <td class="info">Used</td>
+              <td class="info" rowspan="2">Dir</td>
+              <td class="info" rowspan="2">Vel</td>
+              <td rowspan="2"></td>
+              <td class="bottom" rowspan="3">-E<br>+W<br>Var</td>
+              <td class="bottom" rowspan="3">-L<br>+R<br>WCA</td>
+              <td class="bottom" rowspan="3">+/-<br>Dev</td>
+              <td colspan="2"></td>
+            </tr>
+            <tr>
+              <td class="info">Freq</td>
+              <td class="info">Rem</td>
+              <td class="info">Est</td>
+              <td class="info">ETE</td>
+              <td class="info" style="font-size: 50%;">Rev.<br/>ETE</td>
+              <td class="info">ATE</td>
+              <td class="info">Rem</td>
+              <td colspan="2"></td>
+            </tr>
+            <tr>
+              <td class="bottom top" rowspan="2"><div class="from"></div></td>
+              <td class="right top"></td>
+              <td class="bottom"><span id="rem0"></span></td>
+              <td class="info bottom">Act</td>
+              <td class="info bottom">ETA</td>
+              <td class="info bottom" style="font-size: 50%;">Rev.<br/>ETA</td>
+              <td class="info bottom">ATA</td>
+              <td class="bottom"></td>
+              <td class="info bottom" colspan="2">Temp</td>
+              <td class="header bottom">TAS</td>
+              <td colspan="2"></td>
+            </tr>
+
+            <tr id="nav0a" data-n="0" data-part="0">
+              <td class="bottom right"></td>
+              <td class="bottom even" rowspan="2"><span class="ch"></span></td>
+              <td class="bottom even" rowspan="2"><div class="update alt max4"></div></td>
+              <td class="even"><div class="update leg max4"></div></td>
+              <td class="even"><span class="gs"></span></td>
+              <td class="even"><span class="ete"></span></td>
+              <td class="even"></td>
+              <td class="even"></td>
+              <td class="even"></td>
+              <td class="even"><div class="update windir max3"></div></td>
+              <td class="even"><div class="update winvel max3"></div></td>
+              <td class="bottom even" rowspan="2"><div class="update tas max3"></div></td>
+              <td class="even"><div class="update tc max3"></div></td>
+              <td class="even"><span class="mc"></span></td>
+              <td class="even"><span class="mh"></span></td>
+              <td class="bottom number right top" rowspan="2"></td>
+              <td class="comment"></td>
+            </tr>
+            <tr id="nav0b" data-n="0" data-part="1">
+              <td class="bottom" rowspan="2"><div class="to"></div></td>
+              <td class="right"></td>
+              <td class="bottom even"><span class="rem"></span></td>
+              <td class="bottom even"></td>
+              <td class="bottom even"><span class="eta"></span></td>
+              <td class="bottom even"></td>
+              <td class="bottom even"></td>
+              <td class="bottom even"></td>
+              <td class="bottom even" colspan="2"></td>
+              <td class="bottom even"><div class="update vr max3"></div></td>
+              <td class="bottom even"><span class="wca"></span></td>
+              <td class="bottom even"><div class="update dev max3"></div></td>
+              <td></td>
+            </tr>
+            <tr id="lastnav">
+              <td class="right"></td>
+              <td class="gray" colspan="2">totals →</td>
+              <td></td>
+              <td class="gray"></td>
+              <td></td>
+              <td class="gray"></td>
+              <td></td>
+              <td></td>
+              <td class="gray" colspan="6" style="text-align: left;"><span>For Flight On</span></td>
+              <td></td>
+              <td></td>
+            </tr>
+          </table>
+        </div>
+        <div class="buttons">
+          <button onclick="addRow(); refreshNumber();">Add Leg</button>
+          <button onclick="saveChanges();">Save</button>
+          <button onclick="removeRow(); refreshNumber();">Remove Last Leg</button>
+        </div>
+        <div id="url">
+        </div>
+        <div class="copyright">
+          2022 Ted Yin &lt;tederminant@gmail.com&gt;, CC BY-NC-SA.
+        </div>
+      </div>
+    </div>
+    <script>
+var nav0a = document.getElementById("nav0a");
+var nav0b = document.getElementById("nav0b");
+var lastnav = document.getElementById("lastnav");
+var navlog = document.getElementById("navlog");
+nav0a.classList = "even";
+nav0b.classList = "even";
+
+function getNRows() {
+  return (navlog.rows.length - 5) / 2;
+}
+function refreshNumber() {
+  for (var i = 0; i < getNRows(); i++) {
+    document.getElementById("nav"+i+"a").querySelector('.number').innerHTML = i + 1;
+  }
+}
+function removeRow() {
+  var n = getNRows();
+  if (n == 1) {
+    return;
+  }
+  var nav = getEntry(n - 1);
+  nav[0].remove();
+  nav[1].remove();
+}
+function addRow(i) {
+  var newnava = nav0a.cloneNode(true);
+  var newnavb = nav0b.cloneNode(true);
+  if (!i) {
+    i = getNRows();
+  }
+  if (i % 2 == 0) {
+    even = "even";
+  } else {
+    even = "";
+  }
+  newnava.classList = even;
+  newnavb.classList = even;
+  newnava.id = "nav"+i+"a";
+  newnavb.id = "nav"+i+"b";
+  newnava.setAttribute('data-n', i);
+  newnavb.setAttribute('data-n', i);
+  newnava.setAttribute('data-part', 0);
+  newnavb.setAttribute('data-part', 1);
+  lastnav.parentNode.insertBefore(newnavb, lastnav);
+  lastnav.parentNode.insertBefore(newnava, newnavb);
+        setText(newnava, ['alt', 'leg', 'windir', 'winvel', 'tas', 'tc'], {});
+        setText(newnavb, ['to', 'vr', 'dev'], {});
+  refreshRow(newnava);
+  refreshRem();
+  regUpdatable(newnava.querySelectorAll('td div.update'));
+  regUpdatable(newnavb.querySelectorAll('td div.update'));
+}
+function rectifyValue(v) {
+  return isNaN(v) ? "" : v;
+}
+function parseValue(e) {
+  return parseInt(e.innerText);
+}
+function parseValue2(e) {
+  return e.innerText == "" ? 0 : parseInt(e.innerText);
+}
+
+function rad2deg(r) {
+  return r / Math.PI * 180;
+}
+function deg2rad(d) {
+  return d / 180 * Math.PI;
+}
+
+function padZero(num, size) {
+  var s = "000000000" + num;
+  return s.substr(s.length - size);
+}
+
+function rectifyDir(v) {
+  return isNaN(v) ? "" : padZero(v, 3);
+}
+
+function getEntry(i) {
+  return [navlog.rows[i * 2 + 5 - 1], navlog.rows[i * 2 + 5]];
+}
+
+function refreshRow(r) {
+  var n = r.getAttribute('data-n');
+  if (n === null) {
+    return;
+  }
+  var nav = getEntry(n);
+  var nava = nav[0];
+  var navb = nav[1];
+  var tcDom = nava.querySelector('.tc');
+  var mcDom = nava.querySelector('.mc');
+  var mhDom = nava.querySelector('.mh');
+  var chDom = nava.querySelector('.ch');
+  var vrDom = navb.querySelector('.vr');
+  var devDom = navb.querySelector('.dev');
+  var tas = parseValue(nava.querySelector('.tas'));
+  var windir = parseValue(nava.querySelector('.windir'));
+  var winvel = parseValue(nava.querySelector('.winvel'));
+  var wcaDom = navb.querySelector('.wca');
+  var gsDom = nava.querySelector('.gs');
+  var eteDom = nava.querySelector('.ete');
+  var legDom = nava.querySelector('.leg');
+
+  var mc = parseValue(tcDom) + parseValue2(vrDom);
+  mcDom.innerText = rectifyDir(mc);
+  var wca = Math.round(rad2deg(Math.atan(Math.sin(deg2rad(windir - mc)) * winvel / tas)));
+  wcaDom.innerText = isNaN(wca) ? "" : (wca > 0 ? "+" + wca : wca);
+  mhDom.innerText = rectifyDir(parseValue(mcDom) + parseValue2(wcaDom));
+  chDom.innerText = rectifyDir(parseValue(mhDom) + parseValue2(devDom));
+  gsDom.innerText = rectifyValue(Math.round(-Math.cos(deg2rad(windir - mc)) * winvel + tas));
+  eteDom.innerText = rectifyValue(Math.round(parseValue(legDom) / parseValue(gsDom) * 60));
+}
+for (var i = 1; i < 2; i++) {
+  addRow(i);
+}
+function regUpdatable(updatable) {
+  for (var i = 0; i < updatable.length; i++) {
+    updatable[i].addEventListener('input', function() {
+      refreshRow(this.parentNode.parentNode);
+      refreshRem();
+    });
+  }
+}
+function genLimitChars(n) {
+  return function(e) {
+    if (e.which != 8 && this.innerText.length >= n) {
+      e.preventDefault();
+    }
+  }
+}
+
+function regCharLimit(s, n) {
+  var limit = document.querySelectorAll(s);
+  let f = genLimitChars(n);
+  for (var i = 0; i < limit.length; i++) {
+    limit[i].addEventListener("keyup", f);
+    limit[i].addEventListener("keydown", f);
+  }
+}
+function refreshRem() {
+  var rem0Dom = document.getElementById('rem0');
+  var n = getNRows();
+  var r = 0;
+  //var e = 0;
+  for (var i = n - 1; i >= 0; i--) {
+    var nav = getEntry(i);
+    var nava = nav[0];
+    var navb = nav[1];
+    var legDom = nava.querySelector('.leg');
+    var remDom = navb.querySelector('.rem');
+    //var eteDom = nava.querySelector('.ete');
+    //var etaDom = navb.querySelector('.eta');
+    remDom.innerText = rectifyValue(r);
+    //etaDom.innerText = rectifyValue(e);
+    r += parseValue2(legDom);
+    //e += parseValue2(eteDom);
+  }
+  rem0Dom.innerText = rectifyValue(r);
+}
+var jurl = JsonUrl('lzma');
+function getUserData() {
+  var entries = [];
+  function getText(nav, classes, res) {
+    for (var i = 0; i < classes.length; i++) {
+      var c = classes[i];
+      res[c] = nav.querySelector('.'+c).innerText;
+    }
+  }
+  for (var i = 0; i < getNRows(); i++) {
+    var nav = getEntry(i);
+    var nava = nav[0];
+    var navb = nav[1];
+
+    var res = {};
+    getText(nava, ['alt', 'leg', 'windir', 'winvel', 'tas', 'tc'], res);
+    getText(navb, ['to', 'vr', 'dev'], res);
+    entries.push(res);
+  }
+  return jurl.compress({entries, from: navlog.querySelector('.from').innerText});
+}
+
+function setText(nav, classes, res) {
+  for (var i = 0; i < classes.length; i++) {
+    var c = classes[i];
+    nav.querySelector('.'+c).innerText = res[c] === undefined ? "" : res[c];
+  }
+}
+
+function setUserData(data) {
+  jurl.decompress(data).then(json => {
+    for (var i = getNRows(); i < json.entries.length; i++) {
+      addRow(i);
+    }
+    for (var i = 0; i < json.entries.length; i++) {
+      var nav = getEntry(i);
+      var nava = nav[0];
+      var navb = nav[1];
+      var entry = json.entries[i];
+
+      setText(nava, ['alt', 'leg', 'windir', 'winvel', 'tas', 'tc'], entry);
+      setText(navb, ['to', 'vr', 'dev'], entry);
+      refreshRow(nava);
+    }
+    navlog.querySelector('.from').innerText = json.from;
+    refreshRem();
+    refreshNumber();
+  }).catch(_ => {});
+}
+function saveChanges() {
+  getUserData().then(u => {
+    window.location.hash = '#' + u;
+    document.getElementById('url').innerText = 'Saved to ' + window.location.href;
+  });
+}
+function recover() {
+  setUserData(window.location.hash.slice(1));
+}
+window.addEventListener('load', recover);
+window.addEventListener('hashchange', recover);
+var editable = document.querySelectorAll('table.main td div');
+for (var i = 0; i < editable.length; i++) {
+  editable[i].setAttribute('contenteditable', 'true');
+}
+regUpdatable(document.querySelectorAll('table.main td div.update'));
+regCharLimit('table.main .max3', 3);
+regCharLimit('table.main .max4', 4);
+refreshNumber();
+refreshRem();
+    </script>
+  </body>
+</html>
